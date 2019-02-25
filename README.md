@@ -1,6 +1,6 @@
-# Re-Store  - on-line store made with React
+# Re-Store  - on-line store made with React+Redux
 
-Simplest on-line store made with React
+Simplest on-line store made with React+Redux
 
 ## Authors
 
