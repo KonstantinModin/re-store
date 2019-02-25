@@ -8,13 +8,15 @@ import ErrorButton from '../error-button';
 export default class App extends Component {
     render() {
         return (
-            <div>
+            <div className="app">
                 <ErrorBoundry>
-                    <h1>Whats up!!!</h1>
-                    <Spinner name="John"/>
-                    <ErrorButton />
+                        
+                            <h1>Whats app.js!!!</h1>
+                            <Spinner name="John"/>
+                            <ErrorButton />
+                        
                 </ErrorBoundry>
             </div>
-        )
+        );
     };
 };
