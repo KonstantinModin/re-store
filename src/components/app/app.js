@@ -10,12 +10,13 @@ import { HomePage, CartPage} from '../pages';
 const App = () => {   
     
     return (
-        <div classNameName="app">
+        <div className="app">
             <ErrorBoundry>
                     
                 <h1>Whats app.js!!!</h1>
                 <Spinner name="John"/>
                 <ErrorButton />
+                <HomePage />
                     <nav className="navbar navbar-expand-lg navbar-dark bg-primary"> 
                         <div className="collapse navbar-collapse" id="navbarColor01">
                             <ul className="navbar-nav mr-auto">
