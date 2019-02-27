@@ -3,7 +3,8 @@ import Spinner from '../spinner';
 import ErrorBoundry from '../error-boundry';
 import './app.css';
 import ErrorButton from '../error-button';
-import { Route } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
+import { HomePage, CartPage} from '../pages';
 
 
 const App = () => {   
@@ -15,31 +16,29 @@ const App = () => {
                 <h1>Whats app.js!!!</h1>
                 <Spinner name="John"/>
                 <ErrorButton />
-                <div>
                     <nav className="navbar navbar-expand-lg navbar-dark bg-primary"> 
                         <div className="collapse navbar-collapse" id="navbarColor01">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="/">Home</a>
+                                    <Link className="nav-link" to="/">Home</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="/blog">Blog</a>
+                                    <Link className="nav-link" to="/blog">Blog</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="/about">About</a>
+                                    <Link className="nav-link" to="/about">About</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="/shop">Shop</a>
+                                    <Link className="nav-link" to="/shop">Shop</Link>
                                 </li>
                             </ul>
                         </div>
                     </nav>
-                </div>
-
-
-                <Route path="/blog" render={ () => <h1>Blog</h1>}/>
-                <Route path="/about" render={ () => <h1>About</h1>}/>
-                <Route path="/shop" render={ () => <h1>Shop</h1>}/>    
+                <Switch>
+                    <Route path="/blog" render={ () => <h1>Blog</h1>}/>
+                    <Route path="/about" render={ () => <h1>About</h1>}/>
+                    <Route path="/shop" render={ () => <h1>Shop</h1>}/>    
+                </Switch>
             </ErrorBoundry>
         </div>
     );    
