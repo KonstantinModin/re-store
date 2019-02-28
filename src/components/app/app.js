@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import Spinner from '../spinner';
-
+import React from 'react';
 import './app.css';
 
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { HomePage, CartPage} from '../pages';
 import ShopHeader from '../shop-header';
 

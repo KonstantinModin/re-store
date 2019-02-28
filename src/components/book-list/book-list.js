@@ -7,17 +7,19 @@ import { withBookstoreService } from '../hoc';
 import { booksLoaded } from '../../actions';
 import './book-list.css';
 import compose from '../../utils';
+import Spinner from '../spinner';
 
 class BookList extends Component {
 
     componentDidMount() {  
-        const { bookstoreService } = this.props;
-        const data = bookstoreService.getBooks();
-        this.props.booksLoaded(data);
+        const { bookstoreService, booksLoaded } = this.props;
+        bookstoreService.getBooks()
+            .then((data) => booksLoaded(data));        
     }
 
     render() {
-        const { books } = this.props;
+        const { books, loading } = this.props;
+        if (loading) return <Spinner />;
         return (
             <ul className="book-list">
                 {
@@ -32,14 +34,16 @@ class BookList extends Component {
     };
 };
 
-const mapStateToProps = ( state) => {    
-    return { books: state.books };
+
+const mapStateToProps = ( { books, loading }) => {    //state передаёт через пропс
+    return { books, loading };
 };
-console.log(compose);
+
+
 const mapDispatchToProps = {
     booksLoaded
 };
 export default compose(
                     withBookstoreService(),
-                    connect(mapStateToProps, mapDispatchToProps))
-                    (BookList);
+                    connect(mapStateToProps, mapDispatchToProps)
+                    )(BookList);
