@@ -7,7 +7,7 @@ const initialState = {
     
 };
 
-const updateCartItems = (cartItems, item, idx) => {
+const updateCartItems = (cartItems, idx, item) => {
     if (idx === -1) {
         return [
             ...cartItems,
@@ -21,19 +21,18 @@ const updateCartItems = (cartItems, item, idx) => {
     ];
 };
 
-const updateCartItem = (book, item = {}) => {
+const updateCartItem = (book, item = {}, act = 1) => {
     const { id = book.id, 
         count = 0, 
-        title = book.title, 
-        total = 0 } = item; 
+        title = book.title } = item; 
 
-        return {
-            id,
-            title,
-            count: count + 1,
-            total: total + book.price
-        };
+    return {
+        id,
+        title,
+        count: count + act,
+        total: book.price * (count + act)
     };
+};
 
 
 const reducer = (state = initialState, action) => {
@@ -69,8 +68,41 @@ const reducer = (state = initialState, action) => {
           
             return {           
                 ...state,
-                cartItems: updateCartItems(state.cartItems, newItem, itemIndex)                
-            }
+                cartItems: updateCartItems(state.cartItems, itemIndex, newItem)                
+            };
+        
+        case 'BOOK_DECREASED':
+            {const bookId = action.payload;  
+            const book = state.books.find((book) => book.id === bookId);          
+            const itemIndex = state.cartItems.findIndex(({ id }) => id === bookId);
+            const item = state.cartItems[itemIndex];
+
+            const newItem = updateCartItem(book, item, -1);
+        
+            return {           
+                ...state,
+                cartItems: updateCartItems(state.cartItems, itemIndex, newItem)                
+            };}
+
+
+        case 'BOOK_DELETED':
+            {const bookId = action.payload;  
+                    
+            const itemIndex = state.cartItems.findIndex(({ id }) => id === bookId);            
+                console.log(itemIndex);
+            return {
+                ...state,
+                cartItems: [
+                    ...state.cartItems.slice(0, itemIndex),               
+                    ...state.cartItems.slice(itemIndex + 1)
+                ]
+            }          
+            
+        }
+
+
+
+
         default: 
             return state;
     }
