@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { component } from 'react';
 import { connect } from 'react-redux';
 import { bookDecreased, bookAddedToCart, bookDeleted } from '../../actions';
 import './shopping-cart-table.css';
 
 const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
+         
     const renderRow = (item, idx) => {
         const { id, title, count, total } = item;
         return (
